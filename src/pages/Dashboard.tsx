@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
@@ -7,7 +6,7 @@ import ProgressBar from '@/components/dashboard/ProgressBar';
 import BadgesList from '@/components/dashboard/BadgesList';
 import { Button } from '@/components/ui/button';
 import { userProgress, badges, courses } from '@/utils/mockData';
-import { Award, BookOpen, Calendar, Code, Fire, Zap } from 'lucide-react';
+import { Award, BookOpen, Calendar, Code, Flame, Zap } from 'lucide-react';
 
 const Dashboard = () => {
   const earnedBadges = badges.filter(badge => badge.earned);
@@ -57,7 +56,7 @@ const Dashboard = () => {
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 border border-gray-100 dark:border-gray-700">
               <div className="flex items-center">
                 <div className="rounded-full bg-orange-100 dark:bg-orange-900/20 p-3 mr-4">
-                  <Fire size={24} className="text-coderush-orange" />
+                  <Flame size={24} className="text-coderush-orange" />
                 </div>
                 <div>
                   <p className="text-sm text-gray-500 dark:text-gray-400">Current Streak</p>
@@ -181,7 +180,7 @@ const Dashboard = () => {
                   <div className="text-center">
                     <div className="relative flex items-center justify-center">
                       <div className="absolute -z-10 w-32 h-32 rounded-full bg-orange-100 dark:bg-orange-900/20"></div>
-                      <Fire size={64} className="text-coderush-orange" />
+                      <Flame size={64} className="text-coderush-orange" />
                     </div>
                     <div className="mt-3">
                       <p className="text-3xl font-bold">{userProgress.streak}</p>
