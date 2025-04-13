@@ -63,20 +63,23 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-                // CodeRush custom colors
+                // CodeRush custom colors with more vibrant childish palette
                 coderush: {
-                    purple: '#8B5CF6', 
-                    blue: '#0EA5E9',
-                    pink: '#D946EF',
-                    orange: '#F97316',
-                    green: '#10B981',
+                    purple: '#9D50FF', 
+                    blue: '#4FAAFF',
+                    pink: '#FF57D2',
+                    orange: '#FFA84F',
+                    green: '#4FE685',
+                    yellow: '#FFDE59',
                     gray: '#6B7280',
                     dark: '#1F2937'
                 }
 			},
 			fontFamily: {
 				mono: ['Fira Code', 'monospace'],
-				sans: ['Inter', 'sans-serif']
+				sans: ['Inter', 'sans-serif'],
+                pixel: ['"Press Start 2P"', 'cursive'],
+                retro: ['VT323', 'monospace']
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -112,14 +115,36 @@ export default {
                         opacity: '0.5',
                     },
                 },
+                'float': {
+                    '0%, 100%': {
+                        transform: 'translateY(0)',
+                    },
+                    '50%': {
+                        transform: 'translateY(-10px)',
+                    },
+                },
+                'bounce-small': {
+                    '0%, 100%': {
+                        transform: 'translateY(0)',
+                    },
+                    '50%': {
+                        transform: 'translateY(-4px)',
+                    },
+                },
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
                 'caret-blink': 'caret-blink 1.2s ease-out infinite',
                 'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                'float': 'float 3s ease-in-out infinite',
+                'bounce-small': 'bounce-small 2s ease-in-out infinite',
 			},
             boxShadow: {
+                'pixel': '4px 4px 0px rgba(0, 0, 0, 1)',
+                'pixel-lg': '8px 8px 0px rgba(0, 0, 0, 1)',
+                'pixel-xl': '12px 12px 0px rgba(0, 0, 0, 1)',
+                'pixel-inner': 'inset 4px 4px 0px rgba(0, 0, 0, 0.2)',
                 'course-card': '0 10px 25px -5px rgba(139, 92, 246, 0.1), 0 10px 10px -5px rgba(139, 92, 246, 0.04)',
                 'hover-card': '0 20px 25px -5px rgba(139, 92, 246, 0.1), 0 10px 10px -5px rgba(139, 92, 246, 0.04)',
             }

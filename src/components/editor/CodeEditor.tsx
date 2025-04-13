@@ -114,33 +114,35 @@ const CodeEditor = ({
   };
 
   return (
-    <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+    <div className="pixel-code-window shadow-pixel-lg">
       {/* Editor Header */}
-      <div className="flex items-center justify-between bg-gray-100 dark:bg-gray-800 px-4 py-2 border-b border-gray-200 dark:border-gray-700">
-        <div className="flex items-center space-x-2">
-          <div className="flex space-x-1">
-            <div className="w-3 h-3 rounded-full bg-red-500"></div>
-            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-            <div className="w-3 h-3 rounded-full bg-green-500"></div>
+      <div className="flex items-center justify-between bg-black p-4">
+        <div className="flex items-center space-x-3">
+          <div className="flex space-x-3">
+            <div className="w-5 h-5 rounded-none bg-red-500 border-2 border-white"></div>
+            <div className="w-5 h-5 rounded-none bg-yellow-500 border-2 border-white"></div>
+            <div className="w-5 h-5 rounded-none bg-green-500 border-2 border-white"></div>
           </div>
-          <span className="text-sm text-gray-500 dark:text-gray-400">
+          <span className="text-lg text-white font-retro">
             {language === 'javascript' ? 'main.js' : `main.${language}`}
           </span>
         </div>
         <div className="flex space-x-2">
           <Button 
-            variant="ghost" 
+            variant="outline" 
             size="sm" 
             onClick={copyToClipboard}
             title="Copy code"
+            className="border-2 border-white rounded-none bg-transparent text-white hover:bg-gray-700"
           >
             <Copy size={16} />
           </Button>
           <Button 
-            variant="ghost" 
+            variant="outline" 
             size="sm" 
             onClick={downloadCode}
             title="Download code"
+            className="border-2 border-white rounded-none bg-transparent text-white hover:bg-gray-700"
           >
             <Download size={16} />
           </Button>
@@ -148,28 +150,29 @@ const CodeEditor = ({
       </div>
       
       {/* Code Editor */}
-      <div className="flex flex-col md:flex-row">
-        <div className="w-full md:w-1/2 border-r border-gray-200 dark:border-gray-700">
+      <div className="flex flex-col md:flex-row border-t-4 border-black">
+        <div className="w-full md:w-1/2 border-r-4 border-black">
           <textarea
-            className="w-full h-64 p-4 font-mono text-sm bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 resize-none focus:outline-none"
+            className="w-full h-64 p-4 font-mono text-base bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 resize-none focus:outline-none focus:ring-0 border-none"
             value={code}
             onChange={handleCodeChange}
             readOnly={readOnly}
             placeholder="// Write your code here..."
             spellCheck="false"
+            style={{ fontFamily: "'Fira Code', monospace" }}
           ></textarea>
         </div>
         
         {/* Output Panel */}
-        <div className="w-full md:w-1/2 h-64 p-4 font-mono text-sm bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200 overflow-auto">
+        <div className="w-full md:w-1/2 h-64 p-4 font-mono text-base bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200 overflow-auto border-t-4 md:border-t-0 border-black">
           {isRunning ? (
             <div className="flex items-center justify-center h-full">
-              <div className="animate-pulse">Running code...</div>
+              <div className="animate-pulse font-retro text-xl">Loading...</div>
             </div>
           ) : output ? (
-            <pre>{output}</pre>
+            <pre className="font-mono" style={{ fontFamily: "'Fira Code', monospace" }}>{output}</pre>
           ) : (
-            <div className="text-gray-400 dark:text-gray-500 h-full flex items-center justify-center">
+            <div className="text-gray-400 dark:text-gray-500 h-full flex items-center justify-center font-retro text-xl">
               Output will appear here after running your code
             </div>
           )}
@@ -177,9 +180,9 @@ const CodeEditor = ({
       </div>
       
       {/* Editor Footer */}
-      <div className="bg-gray-100 dark:bg-gray-800 px-4 py-2 border-t border-gray-200 dark:border-gray-700">
+      <div className="bg-gray-100 dark:bg-gray-800 p-4 border-t-4 border-black">
         <Button 
-          className="bg-coderush-green hover:bg-coderush-green/90 text-white"
+          className="pixel-button bg-coderush-green hover:bg-coderush-green text-black font-pixel"
           onClick={handleRun}
           disabled={isRunning || readOnly}
         >

@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,7 +7,7 @@
 
 @layer base {
   :root {
-    --background: 260 100% 99%;
+    --background: 39 100% 97%;
     --foreground: 240 10% 3.9%;
 
     --card: 0 0% 100%;
@@ -113,16 +113,16 @@
   }
   
   .course-card {
-    @apply relative overflow-hidden rounded-xl p-6 shadow-course-card transition-all duration-300 hover:shadow-hover-card;
+    @apply relative overflow-hidden border-4 border-black rounded-xl p-6 shadow-pixel hover:translate-y-[-4px] transition-transform duration-300;
   }
   
   .course-card::before {
     content: '';
-    @apply absolute -top-2 -right-2 h-24 w-24 rounded-full bg-gradient-to-br from-coderush-purple/20 to-transparent blur-xl;
+    @apply absolute -top-2 -right-2 h-24 w-24 rounded-full bg-gradient-to-br from-coderush-pink/20 to-transparent blur-xl;
   }
   
   .badge-card {
-    @apply relative flex items-center justify-center w-20 h-20 rounded-lg shadow-md overflow-hidden transition-transform duration-300;
+    @apply relative flex items-center justify-center w-20 h-20 rounded-none border-4 border-black shadow-pixel overflow-hidden transition-transform duration-300;
   }
   
   .badge-card:hover {
@@ -130,11 +130,37 @@
   }
   
   .xp-text {
-    @apply font-mono text-sm font-bold;
+    @apply font-pixelated text-sm font-bold;
   }
   
   .section-title {
-    @apply text-2xl font-bold mb-6 after:content-[''] after:block after:w-16 after:h-1 after:bg-coderush-purple after:mt-2;
+    @apply font-pixelated text-2xl font-bold mb-6 after:content-[''] after:block after:w-16 after:h-4 after:bg-coderush-pink after:mt-2;
+  }
+  
+  .pixel-button {
+    @apply border-4 border-black font-pixelated shadow-pixel hover:translate-y-[-4px] transition-transform duration-300;
+  }
+  
+  .pixel-border {
+    @apply border-4 border-black shadow-pixel;
+  }
+  
+  .pixel-code-window {
+    @apply border-4 border-black bg-white dark:bg-gray-800 rounded-none;
+  }
+  
+  .shadow-pixel {
+    box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.9);
+  }
+
+  /* Pixelated corners */
+  .pixel-corner {
+    clip-path: polygon(
+      0 8px, 8px 8px, 8px 0,
+      calc(100% - 8px) 0, calc(100% - 8px) 8px, 100% 8px,
+      100% calc(100% - 8px), calc(100% - 8px) calc(100% - 8px), calc(100% - 8px) 100%,
+      8px 100%, 8px calc(100% - 8px), 0 calc(100% - 8px)
+    );
   }
 }
 
@@ -142,3 +168,37 @@
   from { width: 0 }
   to { width: 22ch }
 }
+
+@keyframes blink {
+  50% { border-color: transparent }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.font-pixelated {
+  font-family: 'Press Start 2P', cursive;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+}
+
+.font-retro {
+  font-family: 'VT323', monospace;
+}
+
