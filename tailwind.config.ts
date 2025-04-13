@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,21 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+                // CodeRush custom colors
+                coderush: {
+                    purple: '#8B5CF6', 
+                    blue: '#0EA5E9',
+                    pink: '#D946EF',
+                    orange: '#F97316',
+                    green: '#10B981',
+                    gray: '#6B7280',
+                    dark: '#1F2937'
+                }
+			},
+			fontFamily: {
+				mono: ['Fira Code', 'monospace'],
+				sans: ['Inter', 'sans-serif']
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,12 +99,30 @@ export default {
 					to: {
 						height: '0'
 					}
-				}
+				},
+                'caret-blink': {
+                    '0%, 100%': { opacity: '1' },
+                    '50%': { opacity: '0' },
+                },
+                'pulse': {
+                    '0%, 100%': {
+                        opacity: '1',
+                    },
+                    '50%': {
+                        opacity: '0.5',
+                    },
+                },
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+				'accordion-up': 'accordion-up 0.2s ease-out',
+                'caret-blink': 'caret-blink 1.2s ease-out infinite',
+                'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+			},
+            boxShadow: {
+                'course-card': '0 10px 25px -5px rgba(139, 92, 246, 0.1), 0 10px 10px -5px rgba(139, 92, 246, 0.04)',
+                'hover-card': '0 20px 25px -5px rgba(139, 92, 246, 0.1), 0 10px 10px -5px rgba(139, 92, 246, 0.04)',
+            }
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
