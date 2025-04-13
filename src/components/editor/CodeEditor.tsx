@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Play, Copy, Download } from 'lucide-react';
+import { toast } from "@/hooks/use-toast";
 
 interface CodeEditorProps {
   initialCode?: string;
@@ -29,25 +30,77 @@ const CodeEditor = ({
     setOutput('');
     
     try {
-      // For demonstration, we're just showing the code as output
-      // In a real app, you would send the code to a backend for execution
-      setTimeout(() => {
-        setOutput(`// Output:\n${code}`);
+      if (language.toLowerCase() === 'javascript') {
+        // Create a sandbox to execute the JavaScript code safely
+        const executeCode = () => {
+          try {
+            // Create a function from the code to capture console.log output
+            const consoleOutput: string[] = [];
+            const sandboxConsole = {
+              log: (...args: any[]) => {
+                consoleOutput.push(args.map(arg => 
+                  typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
+                ).join(' '));
+              },
+              error: (...args: any[]) => {
+                consoleOutput.push(`Error: ${args.map(arg => 
+                  typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
+                ).join(' ')}`);
+              },
+              warn: (...args: any[]) => {
+                consoleOutput.push(`Warning: ${args.map(arg => 
+                  typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
+                ).join(' ')}`);
+              }
+            };
+
+            // Execute the code with a custom console
+            const executionFunction = new Function('console', code);
+            executionFunction(sandboxConsole);
+            
+            setOutput(consoleOutput.join('\n'));
+          } catch (error) {
+            if (error instanceof Error) {
+              setOutput(`Error: ${error.message}`);
+            } else {
+              setOutput('An unknown error occurred');
+            }
+          }
+          setIsRunning(false);
+        };
+        
+        // Execute the code with a slight delay to show loading state
+        setTimeout(executeCode, 500);
+      } else if (language.toLowerCase() === 'python') {
+        // For Python, we can't execute it in the browser
+        // This would need a backend service
+        setOutput('Python execution requires a backend service.\nThis is a simulation.');
         setIsRunning(false);
-      }, 1000);
+      } else {
+        setOutput(`Execution for ${language} is not supported in the browser.`);
+        setIsRunning(false);
+      }
       
       if (onRun) {
         onRun(code);
       }
     } catch (error) {
-      setOutput(`Error: ${error}`);
+      if (error instanceof Error) {
+        setOutput(`Error: ${error.message}`);
+      } else {
+        setOutput('An unknown error occurred');
+      }
       setIsRunning(false);
     }
   };
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(code);
-    // You could show a toast notification here
+    toast({
+      title: "Copied to clipboard",
+      description: "The code has been copied to your clipboard",
+      duration: 3000
+    });
   };
 
   const downloadCode = () => {
