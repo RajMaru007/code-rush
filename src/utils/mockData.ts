@@ -102,6 +102,30 @@ export const courses: Course[] = [
     lessons: 42,
     xpPoints: 2100,
     completedLessons: 0
+  },
+  {
+    id: 7,
+    title: "Node.js Backend Development",
+    description: "Learn to build scalable server-side applications with Node.js and Express.",
+    difficulty: "Intermediate",
+    language: "JavaScript",
+    imageUrl: "https://cdn-icons-png.flaticon.com/512/5968/5968322.png",
+    duration: "6 weeks",
+    lessons: 36,
+    xpPoints: 1800,
+    completedLessons: 0
+  },
+  {
+    id: 8,
+    title: "SQL Database Design",
+    description: "Master database design and SQL queries for efficient data management.",
+    difficulty: "Intermediate",
+    language: "SQL",
+    imageUrl: "https://cdn-icons-png.flaticon.com/512/2772/2772128.png",
+    duration: "5 weeks",
+    lessons: 30,
+    xpPoints: 1500,
+    completedLessons: 0
   }
 ];
 
