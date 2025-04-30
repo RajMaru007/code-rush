@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
@@ -6,7 +5,7 @@ import Footer from '@/components/layout/Footer';
 import CodeEditor from '@/components/editor/CodeEditor';
 import { Button } from '@/components/ui/button';
 import { courses } from '@/utils/mockData';
-import { Clock, BarChart, Award, ChevronLeft, CheckCircle, Gamepad2, Zap } from 'lucide-react';
+import { Clock, BarChart, Award, ChevronLeft, CheckCircle, Gamepad2, Zap, Trophy } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import { useToast } from '@/components/ui/use-toast';
 
