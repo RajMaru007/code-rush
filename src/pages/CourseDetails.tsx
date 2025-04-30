@@ -39,16 +39,16 @@ const CourseDetails = () => {
       </div>
     );
   }
-  
-  // All lessons are unlocked
-  const lessons = [
-    { id: 1, title: "Introduction", completed: true, locked: false },
-    { id: 2, title: "Variables and Data Types", completed: true, locked: false },
-    { id: 3, title: "Control Flow", completed: false, locked: false },
-    { id: 4, title: "Functions", completed: false, locked: false },
-    { id: 5, title: "Lists and Loops", completed: false, locked: false },
-    { id: 6, title: "Dictionaries", completed: false, locked: false },
-    { id: 7, title: "Classes and Objects", completed: false, locked: false }
+
+  // Use the lessonDetails from the course if available, otherwise use the default lessons
+  const lessons = course.lessonDetails || [
+    { id: 1, title: "Introduction", description: "Learn the basics", completed: true, locked: false },
+    { id: 2, title: "Variables and Data Types", description: "Store and manipulate data", completed: true, locked: false },
+    { id: 3, title: "Control Flow", description: "Make decisions in your code", completed: false, locked: false },
+    { id: 4, title: "Functions", description: "Create reusable blocks of code", completed: false, locked: false },
+    { id: 5, title: "Lists and Loops", description: "Work with collections of data", completed: false, locked: false },
+    { id: 6, title: "Dictionaries", description: "Store key-value pairs", completed: false, locked: false },
+    { id: 7, title: "Classes and Objects", description: "Create custom data types", completed: false, locked: false }
   ];
 
   // Handle lesson click
@@ -62,6 +62,14 @@ const CourseDetails = () => {
 
   // Sample code for the editor based on selected lesson
   const lessonCode = () => {
+    const currentLesson = lessons.find(lesson => lesson.id === selectedLesson);
+    
+    // If the lesson has a code example, use it
+    if (currentLesson && currentLesson.codeExample) {
+      return currentLesson.codeExample;
+    }
+    
+    // Otherwise, use the default code examples
     switch (selectedLesson) {
       case 1:
         return course.language.toLowerCase() === 'python' ?
@@ -157,7 +165,7 @@ console.log(message);`;
     }
   };
 
-  const completedPercent = (2 / lessons.length) * 100;
+  const completedPercent = (course.completedLessons || 2) / lessons.length * 100;
 
   return (
     <div className="min-h-screen flex flex-col bg-yellow-100 dark:bg-gray-900">
@@ -242,7 +250,7 @@ console.log(message);`;
                 <div className="mt-6 border-t-2 border-black pt-4">
                   <div className="flex justify-between items-center mb-2">
                     <div className="font-retro text-sm">Course Progress:</div>
-                    <div className="font-pixel text-sm">2/{lessons.length}</div>
+                    <div className="font-pixel text-sm">{course.completedLessons || 2}/{lessons.length}</div>
                   </div>
                   <div className="progress-8bit">
                     <div className="progress-8bit-bar" style={{ width: `${completedPercent}%` }}></div>
@@ -264,21 +272,7 @@ console.log(message);`;
                   </div>
                   
                   <div className="font-retro text-lg mb-6">
-                    {selectedLesson === 1 && (
-                      <p>Welcome to CodeRush! This introductory lesson will get you familiar with {course.language} syntax and basic programming concepts. Let's start by printing some messages to the console.</p>
-                    )}
-                    {selectedLesson === 2 && (
-                      <p>Variables are containers for storing data values. In this lesson, we'll learn how to create variables and understand different data types in {course.language}.</p>
-                    )}
-                    {selectedLesson === 3 && (
-                      <p>Control flow statements allow your programs to make decisions. We'll learn about if/else statements and how to control the flow of your code based on conditions.</p>
-                    )}
-                    {selectedLesson === 4 && (
-                      <p>Functions are reusable blocks of code designed to perform specific tasks. In this lesson, we'll create functions that calculate game points based on different parameters.</p>
-                    )}
-                    {selectedLesson > 4 && (
-                      <p>In this lesson, you'll learn advanced concepts and techniques in {course.language} programming. Practice with the code editor below to master these skills.</p>
-                    )}
+                    {lessons.find(l => l.id === selectedLesson)?.description || "Learn new programming concepts and techniques in this lesson."}
                   </div>
                   
                   <div className="mb-8 flex flex-wrap gap-2">
@@ -331,7 +325,9 @@ console.log(message);`;
                     {selectedLesson === 2 && "Variables can store different types of data: strings (text), numbers, and booleans (True/False)."}
                     {selectedLesson === 3 && "The if/elif/else structure helps your program make decisions based on conditions."}
                     {selectedLesson === 4 && "Functions help make your code reusable. Don't forget to return a value at the end of your function!"}
-                    {selectedLesson > 4 && "Experiment with the code and see what happens. Learning is about trying new things!"}
+                    {selectedLesson === 5 && "Lists store multiple values in a single variable. You can iterate through them using loops."}
+                    {selectedLesson === 6 && "Dictionaries are key-value pairs that allow you to store related information together."}
+                    {selectedLesson === 7 && "Classes let you create your own custom data types with properties and methods."}
                   </p>
                 </div>
                 
