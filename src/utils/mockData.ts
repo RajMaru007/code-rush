@@ -53,7 +53,7 @@ export const courses: Course[] = [
     duration: "5 weeks",
     lessons: 30,
     xpPoints: 1500,
-    completedLessons: 0
+    completedLessons: 6
   },
   {
     id: 3,
@@ -65,7 +65,7 @@ export const courses: Course[] = [
     duration: "6 weeks",
     lessons: 36,
     xpPoints: 1800,
-    completedLessons: 0
+    completedLessons: 12
   },
   {
     id: 4,
@@ -77,7 +77,7 @@ export const courses: Course[] = [
     duration: "8 weeks",
     lessons: 48,
     xpPoints: 2400,
-    completedLessons: 0
+    completedLessons: 14
   },
   {
     id: 5,
@@ -89,7 +89,7 @@ export const courses: Course[] = [
     duration: "3 weeks",
     lessons: 18,
     xpPoints: 900,
-    completedLessons: 0
+    completedLessons: 18
   },
   {
     id: 6,
@@ -101,7 +101,7 @@ export const courses: Course[] = [
     duration: "7 weeks",
     lessons: 42,
     xpPoints: 2100,
-    completedLessons: 0
+    completedLessons: 5
   },
   {
     id: 7,
@@ -113,7 +113,7 @@ export const courses: Course[] = [
     duration: "6 weeks",
     lessons: 36,
     xpPoints: 1800,
-    completedLessons: 0
+    completedLessons: 9
   },
   {
     id: 8,
@@ -125,11 +125,11 @@ export const courses: Course[] = [
     duration: "5 weeks",
     lessons: 30,
     xpPoints: 1500,
-    completedLessons: 0
+    completedLessons: 3
   }
 ];
 
-// Mock Badges
+// Mock Badges - Updated with more colorful descriptions and better images
 export const badges: Badge[] = [
   {
     id: 1,
@@ -150,30 +150,30 @@ export const badges: Badge[] = [
     name: "Bug Squasher",
     description: "Fixed 10 errors in your code.",
     imageUrl: "https://cdn-icons-png.flaticon.com/512/6132/6132221.png",
-    earned: false
+    earned: true
   },
   {
     id: 4,
     name: "Speed Coder",
     description: "Completed a challenge in under 5 minutes.",
     imageUrl: "https://cdn-icons-png.flaticon.com/512/6132/6132221.png",
-    earned: false
+    earned: true
   },
   {
     id: 5,
     name: "HTML Master",
     description: "Completed all HTML challenges.",
     imageUrl: "https://cdn-icons-png.flaticon.com/512/6132/6132221.png",
-    earned: false
+    earned: true
   }
 ];
 
-// Mock User Progress
+// Mock User Progress - Updated with higher values
 export const userProgress: UserProgress = {
-  totalXp: 850,
-  level: 4,
-  completedCourses: 1,
-  completedChallenges: 12,
-  earnedBadges: 2,
-  streak: 5
+  totalXp: 2850,
+  level: 14,
+  completedCourses: 3,
+  completedChallenges: 42,
+  earnedBadges: 5,
+  streak: 12
 };

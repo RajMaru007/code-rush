@@ -127,6 +127,66 @@
   right: 10px;
 }
 
+/* Lesson indicator */
+.lesson-complete {
+  background-color: #4FE685;
+  border: 3px solid #000;
+}
+
+.lesson-active {
+  background-color: #9D50FF;
+  border: 3px solid #000;
+  transform: scale(1.05);
+}
+
+.lesson-locked {
+  background-color: #f5f5f5;
+  border: 3px solid #000;
+  opacity: 0.8;
+}
+
+/* Quest boxes */
+.quest-box {
+  border: 4px solid black;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.9);
+  transition: all 0.2s;
+}
+
+.quest-box:hover {
+  transform: translateY(-4px);
+}
+
+/* Achievement badges */
+.badge-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 16px;
+}
+
+.badge-item {
+  width: 100px;
+  height: 100px;
+  border: 4px solid black;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.badge-item::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 40px;
+  height: 40px;
+  background-color: #FFD700;
+  transform: rotate(45deg);
+}
+
 /* Pixel Fonts Utilities */
 .font-pixel {
   font-family: 'Press Start 2P', cursive;
@@ -138,4 +198,3 @@
   font-family: 'VT323', monospace;
   font-size: 1.25rem;
 }
-
