@@ -8,20 +8,22 @@ import { ChevronLeft, Trophy } from 'lucide-react';
 import LessonList from '@/components/lessons/LessonList';
 import LessonContent from '@/components/lessons/LessonContent';
 import { courses, courseLessons } from '@/utils/mockData';
+import { toast } from '@/components/ui/use-toast';
 
 const CourseLessons = () => {
   const { courseId } = useParams<{ courseId: string }>();
   const [selectedLessonId, setSelectedLessonId] = useState<number | null>(null);
+  const [localLessons, setLocalLessons] = useState(courseLessons);
   
   // Find the course based on the courseId parameter
   const course = courses.find(c => c.id === Number(courseId));
   
   // Get lessons for this course
-  const lessons = courseLessons.filter(lesson => lesson.courseId === Number(courseId));
+  const lessons = localLessons.filter(lesson => lesson.courseId === Number(courseId));
   
   // Find the selected lesson
   const selectedLesson = selectedLessonId 
-    ? courseLessons.find(lesson => lesson.id === selectedLessonId)
+    ? localLessons.find(lesson => lesson.id === selectedLessonId)
     : null;
     
   // Select first unlocked lesson by default
@@ -34,12 +36,27 @@ const CourseLessons = () => {
     }
   }, [courseId, lessons, selectedLessonId]);
   
+  // Handle unlocking lessons
+  const handleUnlockLesson = (lessonId: number) => {
+    setLocalLessons(prev => prev.map(lesson => 
+      lesson.id === lessonId ? { ...lesson, locked: false } : lesson
+    ));
+    
+    toast({
+      title: "Lesson Unlocked!",
+      description: "You can now access this lesson content.",
+      duration: 3000,
+    });
+  };
+  
   // Generate lesson content if a lesson is selected
   const lessonContent = selectedLesson ? {
     title: selectedLesson.title,
     description: selectedLesson.description,
     code: selectedLesson.code,
-    language: course?.language.toLowerCase() || 'javascript'
+    language: course?.language.toLowerCase() || 'javascript',
+    locked: selectedLesson.locked,
+    id: selectedLesson.id
   } : null;
 
   // If course not found, show error
@@ -116,7 +133,10 @@ const CourseLessons = () => {
             {/* Main content area */}
             <div className="lg:col-span-9">
               <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 border border-gray-100 dark:border-gray-700">
-                <LessonContent content={lessonContent} />
+                <LessonContent 
+                  content={lessonContent} 
+                  onUnlock={handleUnlockLesson}
+                />
                 
                 {selectedLesson && !selectedLesson.locked && (
                   <div className="mt-8 flex justify-between">
