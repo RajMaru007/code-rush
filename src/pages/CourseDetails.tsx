@@ -6,7 +6,7 @@ import Footer from '@/components/layout/Footer';
 import CodeEditor from '@/components/editor/CodeEditor';
 import { Button } from '@/components/ui/button';
 import { courses } from '@/utils/mockData';
-import { Clock, BarChart, Award, ChevronLeft, CheckCircle, Circle, Lock } from 'lucide-react';
+import { Clock, BarChart, Award, ChevronLeft, CheckCircle, Circle, Lock, BookOpen } from 'lucide-react';
 
 const CourseDetails = () => {
   const { courseId } = useParams<{ courseId: string }>();
@@ -102,7 +102,14 @@ console.log(message);`;
             {/* Left sidebar with lessons */}
             <div className="lg:col-span-3">
               <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 border border-gray-100 dark:border-gray-700 sticky top-24">
-                <h2 className="text-xl font-bold mb-4">Course Content</h2>
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-xl font-bold">Course Content</h2>
+                  <Link to={`/courses/${courseId}/lessons`}>
+                    <Button variant="ghost" size="sm" className="text-coderush-purple">
+                      <BookOpen size={16} className="mr-1" /> View All
+                    </Button>
+                  </Link>
+                </div>
                 <div className="space-y-2">
                   {lessons.map((lesson) => (
                     <div 
@@ -192,9 +199,11 @@ console.log(message);`;
                         Enroll now and get access to all {course.lessons} lessons and challenges.
                       </p>
                     </div>
-                    <Button className="bg-white text-coderush-purple hover:bg-white/90 px-8">
-                      Start Learning Now
-                    </Button>
+                    <Link to={`/courses/${courseId}/lessons`}>
+                      <Button className="bg-white text-coderush-purple hover:bg-white/90 px-8">
+                        Start Learning Now
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>
